@@ -19,7 +19,6 @@ def bullcows(guess: str, secret: str) -> Tuple[int, int]:
 
 
 def gameplay(ask: Callable, inform: Callable, words: List[str]) -> int:
-    print(words)
     secret = random.choice(words)
 
     guession_count = 0
@@ -31,7 +30,7 @@ def gameplay(ask: Callable, inform: Callable, words: List[str]) -> int:
         inform("Быки: {}, Коровы: {}", bulls, cows)
         guession_count += 1
 
-    ask("Слово угадано!")
+    ask(f"Слово угадано! Попыток сделано: {guession_count}.")
     return guession_count
 
 
@@ -66,7 +65,7 @@ def main():
         with open(args.dictionary) as file:
             words = file.readlines()
 
-    words = [i for i in words if len(i) == args.length]
+    words = [i.strip() for i in words if len(i) == args.length]
 
     gameplay(ask, inform, words)
 
