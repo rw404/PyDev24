@@ -4,6 +4,8 @@ from collections import Counter
 from typing import Callable, List, Tuple
 from urllib import request
 
+import cowsay
+
 
 def bullcows(guess: str, secret: str) -> Tuple[int, int]:
     if len(guess) != len(secret):
@@ -48,7 +50,18 @@ def ask(prompt: str, valid: List[str] = None) -> str:
 
 
 def inform(format_string: str, bulls: int, cows: int) -> None:
-    print(format_string.format(bulls, cows))
+    print(
+        cowsay.cowsay(
+            message=format_string.format(bulls, cows),
+            cow=cowsay.get_random_cow(),
+            preset=None,
+            eyes=cowsay.Option.eyes,
+            tongue=cowsay.Option.tongue,
+            width=40,
+            wrap_text=True,
+            cowfile=None,
+        )
+    )
 
 
 def main():
