@@ -1,5 +1,6 @@
 import argparse
 import random
+from collections import Counter
 from typing import Callable, List, Tuple
 from urllib import request
 
@@ -13,7 +14,7 @@ def bullcows(guess: str, secret: str) -> Tuple[int, int]:
         if guess_letter == secret_letter
     )
 
-    cows = len(set(guess) & set(secret))
+    cows = sum((Counter(guess) & Counter(secret)).values())
 
     return bulls, cows
 
@@ -40,6 +41,7 @@ def ask(prompt: str, valid: List[str] = None) -> str:
     if valid is not None:
         guess = input()
         while guess not in valid:
+            print("Слово не в словаре! " + prompt)
             guess = input()
 
     return guess
