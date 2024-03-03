@@ -1,6 +1,7 @@
 import argparse
 import random
 from collections import Counter
+from io import StringIO
 from typing import Callable, List, Tuple
 from urllib import request
 
@@ -38,12 +39,52 @@ def gameplay(ask: Callable, inform: Callable, words: List[str]) -> int:
 
 
 def ask(prompt: str, valid: List[str] = None) -> str:
-    print(prompt)
+    cow = cowsay.read_dot_cow(
+        StringIO(
+            """
+$the_cow = <<EOC;
+         $thoughts
+          $thoughts
+             __
+            /  \\
+            |  |
+            @  @
+            |  |
+            || |/
+            || ||
+            |\\_/|
+            \\___/
+EOC
+"""
+        )
+    )
+
+    print(
+        cowsay.cowsay(
+            message=prompt,
+            cowfile=cow,
+            preset=None,
+            eyes=cowsay.Option.eyes,
+            tongue=cowsay.Option.tongue,
+            width=40,
+            wrap_text=True,
+        )
+    )
     guess = ""
     if valid is not None:
         guess = input()
         while guess not in valid:
-            print("Слово не в словаре! " + prompt)
+            print(
+                cowsay.cowsay(
+                    message="Слово не в словаре! " + prompt,
+                    cowfile=cow,
+                    preset=None,
+                    eyes=cowsay.Option.eyes,
+                    tongue=cowsay.Option.tongue,
+                    width=40,
+                    wrap_text=True,
+                )
+            )
             guess = input()
 
     return guess
