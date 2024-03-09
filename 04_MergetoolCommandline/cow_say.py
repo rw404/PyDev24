@@ -111,6 +111,18 @@ class CowSayShell(cmd.Cmd):
 
         print(cowsay.list_cows(*list_cows_args))
 
+    def do_make_bubble(self, args):
+        """
+        Make bubble programm
+        Usage: make_bubble [message]
+
+        Params:
+            message[REQUIRED]: string message
+        """
+        bubble_args = self.parse_shlex(args)
+
+        print(cowsay.make_bubble(*bubble_args))
+
     def do_exit(self, *args):
         """
         Call to exit
