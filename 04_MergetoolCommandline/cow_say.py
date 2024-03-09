@@ -96,6 +96,21 @@ class CowSayShell(cmd.Cmd):
                 return [tongue.tongue for tongue in cowsay.COW_OPTIONS.values()]
         return None
 
+    def do_list_cows(self, args):
+        """
+        Print list of cows:
+        Usage: list_cows [file]
+
+        Params:
+            file[OPTIONAL]: files of list
+        """
+
+        list_cows_args = self.parse_shlex(args)
+        if list_cows_args[0] == "":
+            list_cows_args[0] = cowsay.COW_PEN
+
+        print(cowsay.list_cows(*list_cows_args))
+
     def do_exit(self, *args):
         """
         Call to exit
